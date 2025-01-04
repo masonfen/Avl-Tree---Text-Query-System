@@ -1,6 +1,7 @@
 #include "avl.h"
 #include <iostream>
 #include <fstream>
+#include <ctime> // For time()
 
 int main(int argc, char *argv[])
 {
@@ -41,6 +42,14 @@ int main(int argc, char *argv[])
 
   input_file.close();
   output_file.close();
+
+  // Add a 30-second delay using time()
+  std::cout << "Program complete. Pausing for 30 seconds to allow memory monitoring..." << std::endl;
+  time_t start_time = time(nullptr); // Get the current time
+  while (time(nullptr) - start_time < 30)
+  {
+    // Busy-wait for 30 seconds
+  }
 
   return 0;
 }

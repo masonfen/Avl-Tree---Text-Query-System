@@ -2,20 +2,34 @@
 CC = g++
 CFLAGS = -std=c++17 -Wall -g
 
-# Target executable
-TARGET = wordrange
+# Target executables
+AVL_EXEC = wordrange
+NAIVE_EXEC = naive_wordrange
 
 # Source files
-SRCS = main.cpp avl.cpp
-wordrange: main.o avl.o
-	g++ -o wordrange main.o avl.o
+AVL_SRCS = main.cpp avl.cpp
+NAIVE_SRCS = main_naive.cpp naive.cpp
 
-main.o: main.cpp
-	g++ -c main.cpp
+# Object files
+AVL_OBJS = $(AVL_SRCS:.cpp=.o)
+NAIVE_OBJS = $(NAIVE_SRCS:.cpp=.o)
 
-avltree.o: avl.cpp avl.h
-	g++ -c avl.cpp
+# Default target (build both executables)
+all: $(AVL_EXEC) $(NAIVE_EXEC)
 
+# Build AVL Tree executable
+$(AVL_EXEC): $(AVL_OBJS)
+	$(CC) $(CFLAGS) -o $@ $(AVL_OBJS)
+
+# Build Naive BST executable
+$(NAIVE_EXEC): $(NAIVE_OBJS)
+	$(CC) $(CFLAGS) -o $@ $(NAIVE_OBJS)
+
+# Compile source files into object files
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean build files
 clean:
-	del /f main.o avl.o wordrange.exe
+	del /f *.o $(AVL_EXEC).exe $(NAIVE_EXEC).exe
 
