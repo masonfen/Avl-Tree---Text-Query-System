@@ -1,5 +1,5 @@
-#ifndef avl_H
-#define avl_H
+#ifndef AVL_H
+#define AVL_H
 #include <string>
 
 struct AVLNode
