@@ -4,36 +4,47 @@
 This program implements an **AVL tree** for managing a collection of words. It supports:
 - **Insertions**: Add unique words into the tree.
 - **Range Queries**: Efficiently query the number of words within a specified lexicographical range.
+1. **Optimized AVL Tree**:
+   - Supports efficient insertions and range queries using a self-balancing AVL tree.
+2. **Naive BST**:
+   - Provides a baseline for comparison by implementing a simple, unbalanced binary search tree (BST) with less efficient operations.
 
-The program is optimized to handle up to a million insertions and two million range queries efficiently, leveraging the self-balancing properties of AVL trees.
+The naive implementation highlights the performance gains achieved by the AVL tree in ter
 
 ---
 
 ## Features
-- **Efficient Operations**:
-  - AVL Tree ensures logarithmic height for quick insertions and lookups.
-  - Subtree size augmentation enables fast range queries.
-- **Modular Codebase**:
-  - Separate files for the AVL tree logic, main program, and build configuration.
-- **Scalable Design**:
-  - Handles large datasets with millions of operations in minimal time.
+### Optimized AVL Tree
+- **Logarithmic Complexity**:
+  - AVL Tree ensures balanced height for efficient insertions and lookups.
+- **Augmented Range Queries**:
+  - Subtree size augmentation enables quick range query computation.
+
+### Naive BST
+- **Unbalanced Growth**:
+  - Demonstrates inefficient performance with skewed or large datasets.
+- **Linear Complexity**:
+  - Operations may degrade to \(O(n)\), providing a worst-case baseline for comparison.
 
 ---
 
 ## File Descriptions
 - **`avl.h` and `avl.cpp`**:
-  - Implements the AVL tree with support for:
+  - Implements the optimized AVL tree with:
     - Word insertion.
-    - Range query computation using subtree sizes.
+    - Fast range queries using subtree sizes.
+- **`naive.h` and `naive.cpp`**:
+  - Implements a simple, unbalanced BST for:
+    - Basic word insertion.
+    - Inefficient range queries requiring full-tree traversal.
 - **`main.cpp`**:
-  - Handles input and output file processing.
-  - Integrates the AVL tree for performing insertions and queries.
-- **`wordrange`**:
-  - The compiled executable created by the Makefile.
-  - Processes operations as specified in the input file and writes results to the output file.
+  - Uses the AVL tree for performing insertions and range queries.
+- **`main_naive.cpp`**:
+  - Uses the naive BST to perform the same operations for performance comparison.
 - **`Makefile`**:
-  - Automates the compilation process to generate the executable.
-
+  - Automates the compilation of both versions into separate executables:
+    - `wordrange` for the AVL tree.
+    - `naive_wordrange` for the naive BST.
 ---
 
 ## How It Works
@@ -85,13 +96,7 @@ The program is optimized to handle up to a million insertions and two million ra
 
 ---
 
-## Performance
-The program processes:
-- **1 million insertions**.
-- **2 million range queries**.
-All operations complete in under one minute, demonstrating the efficiency of AVL tree-based implementations.
 
----
 
 
 ## Additional Notes
@@ -100,6 +105,15 @@ All operations complete in under one minute, demonstrating the efficiency of AVL
   - Uses lexicographical comparisons for string operations.
 - Subtree sizes enable logarithmic complexity for range queries, ensuring scalability.
 
----
+## For benchmark testing
+Run both implementations with the same dataset to observe differences in:
+- Runtime performance.
+- Memory usage.
+
+Example commands:
+```bash
+./wordrange input.txt output_avl.txt
+./naive_wordrange input.txt output_naive.tx
+
 
 
